@@ -2,13 +2,51 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>📚 کتابخانه نگار</title>
+    <title>ورود به کتابخانه نگار</title>
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+            font-family: Tahoma;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: #1b2f4a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+        }
+        button {
+            background: #4fc3f7;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        a {
+            color: #4fc3f7;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="color: #4fc3f7; font-size: 3rem;">📚 کتابخانه نگار</h1>
-    <p style="font-size: 1.5rem;">✅ اگر این صفحه رو می‌بینی، سایت درست کار میکنه!</p>
-    <p>حالا می‌تونی بقیه صفحات رو هم اضافه کنی.</p>
-    <br>
-    <a href="login.html" style="color: blue; font-size: 1.5rem;">🚀 ورود به کتابخانه</a>
+    <div class="box">
+        <h1>📚 کتابخانه نگار</h1>
+        <p>لطفاً کد ۱۰ رقمی خود را وارد کنید</p>
+        <input type="text" placeholder="مثال: ۱۲۳۴۵۶۷۸۹۰">
+        <button>ورود</button>
+        <p>حساب ندارید؟ <a href="index.html">ثبت‌نام کنید</a></p>
+        <br>
+        <a href="index.html">← بازگشت به خانه</a>
+    </div>
 </body>
 </html>
