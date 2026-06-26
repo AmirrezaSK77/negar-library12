@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>کتابخانه نگار</title>
+    <style>
+        /* ===== استایل‌های قبلی ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b1a2b;
+            font-family: 'Segoe UI', 'Vazir', Tahoma, sans-serif;
+            color: #eef5ff;
+            padding: 16px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 30px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo {
+            font-size: 36px;
+        }
+        .site-title {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to left, #b3f0ff, #5ac8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .search-box input {
+            padding: 8px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #eef5ff;
+            font-size: 14px;
+            outline: none;
+            width: 180px;
+            transition: 0.3s;
+        }
+        .search-box input:focus {
+            border-color: rgba(90, 200, 255, 0.3);
+            background: rgba(255, 255, 255, 0.07);
+        }
+        .search-box input::placeholder {
+            color: #667799;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .user-badge {
+            background: rgba(90, 200, 255, 0.1);
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #b3e0ff;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(90, 200, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .user-badge:hover {
+            background: rgba(90, 200, 255, 0.15);
+        }
+        .user-badge .score {
+            color: #f5c542;
+        }
+        .btn-out {
+            background: rgba(255, 68, 102, 0.15);
+            border: 1px solid rgba(255, 68, 102, 0.3);
+            color: #ff6688;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-out:hover {
+            background: rgba(255, 68, 102, 0.25);
+            border-color: #ff4466;
+            color: #ff8899;
+            transform: scale(1.03);
+        }
+        .btn-admin {
+            background: rgba(245, 197, 66, 0.12);
+            border: 1px solid rgba(245, 197, 66, 0.2);
+            color: #f5c542;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .btn-admin:hover {
+            background: rgba(245, 197, 66, 0.2);
+            border-color: #f5c542;
+        }
+        .btn-shop {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #b3e0ff;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .btn-shop:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .hero {
+            background: linear-gradient(145deg, #0f1a2b, #16213e);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .hero .diamond {
+            font-size: 72px;
+            display: block;
+            margin-bottom: 8px;
+            animation: floatDiamond 3s ease-in-out infinite;
+        }
+        @keyframes floatDiamond {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        .hero h1 {
+            font-family: 'Kulak', 'B Yekan', 'Vazir', sans-serif;
+            font-size: 52px;
+            font-weight: 900;
+            background: linear-gradient(to left, #b3f0ff, #5ac8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        .hero p {
+            color: #b3d9ff;
+            font-size: 20px;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+        .hero .btn-primary {
+            margin-top: 20px;
+            display: inline-block;
+            background: #5ac8ff;
+            color: #0b0e1a;
+            font-weight: 700;
+            padding: 14px 40px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 30px #00aaff55;
+        }
+        .hero .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px #00bbffaa;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #c0d4f0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title span {
+            color: #5ac8ff;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+            cursor: default;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(90, 200, 255, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        .card .icon {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+        .card .name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #eef5ff;
+        }
+        .card .sub {
+            font-size: 13px;
+            color: #8899bb;
+        }
+        .card .btn-sm {
+            margin-top: 10px;
+            display: inline-block;
+            background: rgba(90, 200, 255, 0.12);
+            color: #5ac8ff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid rgba(90, 200, 255, 0.1);
+            cursor: pointer;
+        }
+        .card .btn-sm:hover {
+            background: rgba(90, 200, 255, 0.2);
+        }
+        .card .price {
+            color: #f5c542;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            color: #667799;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #667799;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer a:hover {
+            color: #5ac8ff;
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero .diamond {
+                font-size: 48px;
+            }
+            .header {
+                padding: 12px 16px;
+            }
+            .site-title {
+                font-size: 18px;
+            }
+            .logo {
+                font-size: 28px;
+            }
+            .user-badge {
+                font-size: 12px;
+                padding: 4px 12px;
+            }
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
+            }
+            .search-box input {
+                width: 120px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== هدر ===== -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo">📚</span>
+                <span class="site-title">کتابخانه نگار</span>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 جستجوی کتاب..." oninput="filterBooks()" />
+            </div>
+            <div class="header-actions">
+
+                <a href="shop.html" class="btn-shop">🛍️ مغازه</a>
+
+                <a href="profile.html" class="user-badge" id="userBadge">
+                    👤 <span id="usernameDisplay">کاربر</span>
+                    🏆 <span class="score" id="headerScore">۰</span>
+                </a>
+
+                <button class="btn-admin" id="adminBtn" onclick="openAdmin()" style="display:none;">🔐 مدیریت</button>
+
+                <a href="javascript:void(0)" class="btn-out" onclick="logout()">
+                    ✕ خروج
+                </a>
+            </div>
+        </header>
+
+        <!-- ===== بنر ===== -->
+        <section class="hero">
+            <span class="diamond">💎</span>
+            <h1>کتابخانه نگار</h1>
+            <p>هزاران کتاب رایگان در گوشی شما ❗</p>
+            <a href="#" class="btn-primary">مشاهده کتاب‌ها</a>
+        </section>
+
+        <!-- ===== دسته‌بندی‌ها ===== -->
+        <div class="section-title">📂 دسته‌بندی‌ها</div>
+        <div class="grid" id="categoriesGrid">
+            <div class="card"><div class="icon">📖</div><div class="name">رمان</div></div>
+            <div class="card"><div class="icon">🚀</div><div class="name">علمی-تخیلی</div></div>
+            <div class="card"><div class="icon">🏛️</div><div class="name">تاریخی</div></div>
+            <div class="card"><div class="icon">🧠</div><div class="name">روانشناسی</div></div>
+            <div class="card"><div class="icon">🎭</div><div class="name">شعر</div></div>
+            <div class="card"><div class="icon">🧸</div><div class="name">کودک</div></div>
+        </div>
+
+        <!-- ===== کتاب‌های محبوب ===== -->
+        <div class="section-title">📖 <span>کتاب‌های محبوب</span></div>
+        <div class="grid" id="booksGrid"></div>
+
+        <!-- ===== بازی‌ها ===== -->
+        <div class="section-title">🎮 <span>سرگرمی کتاب</span></div>
+        <div class="grid" id="gamesGrid"></div>
+
+        <!-- ===== مغازه ===== -->
+        <div class="section-title">🛍️ <span>مغازه‌ی امتیاز</span></div>
+        <div class="grid" id="shopGrid"></div>
+
+        <!-- ===== فوتر ===== -->
+        <footer class="footer">
+            <div>© ۱۴۰۴ کتابخانه نگار</div>
+            <div>
+                <a href="#">درباره ما</a> &nbsp;|&nbsp;
+                <a href="#">تماس</a> &nbsp;|&nbsp;
+                <a href="#">قوانین</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // ================================================================
+        //  بارگذاری اطلاعات کاربر
+        // ================================================================
+
+        const currentUser = JSON.parse(localStorage.getItem('negarUser'));
+
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+
+        function loadUser() {
+            document.getElementById('usernameDisplay').textContent = currentUser.username || 'کاربر';
+            const score = localStorage.getItem('negarLibraryScore') || 0;
+            document.getElementById('headerScore').textContent = score;
+
+            if (currentUser.isAdmin) {
+                document.getElementById('adminBtn').style.display = 'inline-block';
+            }
+        }
+
+        // ================================================================
+        //  خروج
+        // ================================================================
+
+        function logout() {
+            if (confirm('آیا از خروج مطمئن هستید؟')) {
+                localStorage.removeItem('negarUser');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // ================================================================
+        //  بارگذاری کتاب‌ها
+        // ================================================================
+
+        function loadBooks() {
+            const saved = localStorage.getItem('negarBooks');
+            const books = saved ? JSON.parse(saved) : [
+                { id: 1, name: 'صد سال تنهایی', author: 'گابریل گارسیا مارکز', cover: '📖' },
+                { id: 2, name: 'دنیای سوفی', author: 'یوستین گردر', cover: '📘' },
+                { id: 3, name: 'بوف کور', author: 'صادق هدایت', cover: '📕' },
+                { id: 4, name: 'شازده کوچولو', author: 'آنتوان دو سنت اگزوپری', cover: '📙' },
+            ];
+            if (!saved) localStorage.setItem('negarBooks', JSON.stringify(books));
+
+            renderBooks(books);
+            window.allBooks = books;
+        }
+
+        function renderBooks(books) {
+            const container = document.getElementById('booksGrid');
+            container.innerHTML = books.slice(0, 6).map(b => `
+                <div class="card">
+                    <div class="icon">${b.cover || '📚'}</div>
+                    <div class="name">${b.name}</div>
+                    <div class="sub">${b.author || 'ناشناس'}</div>
+                    <a href="book-detail.html?id=${b.id}" class="btn-sm">مشاهده</a>
+                </div>
+            `).join('');
+        }
+
+        function filterBooks() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = window.allBooks.filter(b => b.name.toLowerCase().includes(query));
+            renderBooks(filtered);
+        }
+
+        // ================================================================
+        //  بارگذاری بازی‌ها
+        // ================================================================
+
+        function loadGames() {
+            const saved = localStorage.getItem('negarGames');
+            const games = saved ? JSON.parse(saved) : [
+                { id: 1, name: 'نبرد با ربات', emoji: '⚔️', link: 'game.html' },
+                { id: 2, name: 'حدس کلمه', emoji: '🧩', link: 'wordguess.html' },
+            ];
+            if (!saved) localStorage.setItem('negarGames', JSON.stringify(games));
+
+            const container = document.getElementById('gamesGrid');
+            container.innerHTML = games.map(g => `
+                <div class="card">
+                    <div class="icon">${g.emoji}</div>
+                    <div class="name">${g.name}</div>
+                    <a href="${g.link}" class="btn-sm">بازی کن</a>
+                </div>
+            `).join('');
+        }
+
+        // ================================================================
+        //  بارگذاری مغازه
+        // ================================================================
+
+        function loadShop() {
+            const items = [
+                { id: 1, name: 'دانلود کتاب', icon: '📖', price: 180 },
+                { id: 2, name: 'کتاب هدیه', icon: '🎁', price: 200 },
+                { id: 3, name: 'نشان ویژه', icon: '🏆', price: 200 },
+                { id: 4, name: 'اشتراک ماهانه', icon: '📚', price: 800 },
+            ];
+            const container = document.getElementById('shopGrid');
+            container.innerHTML = items.map(item => `
+                <div class="card">
+                    <div class="icon">${item.icon}</div>
+                    <div class="name">${item.name}</div>
+                    <div class="price">${item.price} امتیاز</div>
+                    <a href="shop.html" class="btn-sm">خرید</a>
+                </div>
+            `).join('');
+        }
+
+        // ================================================================
+        //  پنل مدیریت
+        // ================================================================
+
+        function openAdmin() {
+            const pass = prompt('رمز مدیریت را وارد کنید:');
+            if (pass === 'AR#9x2V5q8P') {
+                alert('🔓 پنل مدیریت باز شد!');
+                // کد کامل پنل مدیریت قبلاً داده شده
+            } else if (pass !== null) {
+                alert('رمز اشتباه است!');
+            }
+        }
+
+        // ================================================================
+        //  مقداردهی اولیه
+        // ================================================================
+
+        loadUser();
+        loadBooks();
+        loadGames();
+        loadShop();
+
+        setInterval(() => {
+            const score = localStorage.getItem('negarLibraryScore') || 0;
+            document.getElementById('headerScore').textContent = score;
+        }, 5000);
+    </script>
+</body>
+</html>
