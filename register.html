@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت‌نام در کتابخانه نگار</title>
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+            font-family: Tahoma;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: #1b2f4a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 300px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+        }
+        button {
+            background: #4fc3f7;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        a {
+            color: #4fc3f7;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>📚 ثبت‌نام</h1>
+        <input type="text" id="regUsername" placeholder="نام کاربری">
+        <input type="text" id="regCode" placeholder="کد ۱۰ رقمی">
+        <button onclick="register()">ثبت‌نام</button>
+        <p>حساب دارید؟ <a href="login.html">ورود</a></p>
+        <br>
+        <a href="index.html">← بازگشت به خانه</a>
+    </div>
+
+    <script>
+        function register() {
+            const username = document.getElementById('regUsername').value.trim();
+            const code = document.getElementById('regCode').value.trim();
+
+            if (!username || !code) {
+                alert('لطفاً همه فیلدها را پر کنید!');
+                return;
+            }
+            if (code.length !== 10 || isNaN(code)) {
+                alert('کد باید ۱۰ رقم باشد!');
+                return;
+            }
+
+            const user = { username, code, isAdmin: false };
+            localStorage.setItem('negarUser', JSON.stringify(user));
+            localStorage.setItem('negarLibraryScore', '0');
+            alert('✅ ثبت‌نام موفق!');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
